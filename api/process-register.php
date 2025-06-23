@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Basic validation
     if (!$name || !$email || !$phone || !$password || !$role || !$location) {
-        header("Location: ../register.php?error=Please+fill+all+fields");
+        header("Location: ../register.php");
         exit;
     }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? OR phone = ?");
     $stmt->execute([$email, $phone]);
     if ($stmt->fetch()) {
-        header("Location: ../register.php?error=Email+or+phone+already+registered");
+        header("Location: ../register.php");
         exit;
     }
 
@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Insert user into database
-    $stmt = $pdo->prepare("INSERT INTO users (name, email, phone, password, role, location, verified) VALUES (?, ?, ?, ?, ?, ?, 0)");
+    $stmt = $pdo->prepare("INSERT INTO users (name, email, phone, password, role, location) VALUES (?, ?, ?, ?, ?, ?)");
     $result = $stmt->execute([$name, $email, $phone, $hashed_password, $role, $location]);
 
     if ($result) {
-        header("Location: ../login.php?success=Account+created+successfully");
+        header("Location: ../login.php");
         exit;
     } else {
-        header("Location: ../register.php?error=Registration+failed");
+        header("Location: ../register.php");
         exit;
     }
 } else {

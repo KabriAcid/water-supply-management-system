@@ -9,7 +9,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <span class="focus">
                     <img src="../../favicon.png" alt="favicon" width="50px" height="50px">
                 </span>
-                <span class="unfocus">ServiceHub</span>
+                <span class="unfocus">Water Management System</span>
             </a>
         </div>
         <div class="separator-wrapper">

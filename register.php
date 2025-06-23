@@ -29,7 +29,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Register As</label>
-                        <select class="form-select" id="role" name="role" required>
+                        <select class="form-select form-control" id="role" name="role" required>
                             <option value="" disabled selected>Select role</option>
                             <option value="client">Client</option>
                             <option value="provider">Service Provider</option>
