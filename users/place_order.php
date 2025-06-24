@@ -2,18 +2,7 @@
 session_start();
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../components/header.php';
-
-// Helper to get env variable
-function env($key, $default = null)
-{
-    if (isset($_ENV[$key])) return $_ENV[$key];
-    if (function_exists('getenv')) {
-        $val = getenv($key);
-        if ($val !== false) return $val;
-    }
-    return $default;
-}
-
+require_once __DIR__ . '/../util/utilities.php';
 
 $error = '';
 $success = '';
