@@ -14,7 +14,7 @@ function set_title(string $title = 'Water Supply Management System')
     <!-- Page title is set dynamically. Pass $page_title before including this file to override. -->
     <title><?= isset($page_title) ? set_title($page_title) : set_title() ?></title>
     <!-- Favicon: adjust path as needed based on your directory structure -->
-    <link rel="shortcut icon" href="/water-supply-system/public/assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/water-supply-system/assets/img/logo.png" type="image/x-icon">
 
     <!-- Bootstrap CSS (Grid and Utilities) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css">

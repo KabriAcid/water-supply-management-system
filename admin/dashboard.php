@@ -9,14 +9,10 @@ if (!isset($_SESSION['user_id'])) {
 <?php require __DIR__ . '/../components/header.php'; ?>
 
 <body>
-    <div class="main-content">
-        <?php
-        require_once __DIR__ . '/../components/sidebar.php';
-        ?>
-        <div class="dashboard-body">
-            <?php
-            require_once __DIR__ . '/../components/navbar.php';
-            ?>
+    <div class="d-flex" style="min-height: 100vh;">
+        <?php require_once __DIR__ . '/../components/sidebar.php'; ?>
+        <div class="flex-grow-1" style="margin-left: var(--sidebar-width); min-width: 0; padding: 15px;">
+            <?php require_once __DIR__ . '/../components/dashboard-navbar.php'; ?>
             <div class="container-fluid">
                 <div class="row g-4 my-3">
                     <div class="col-md-4">
@@ -41,13 +37,11 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </div>
                 </div>
-
                 <div class="dashboard-section">
                     <div class="section-title">
                         <p>Recent Activity</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

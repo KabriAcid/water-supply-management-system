@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between align-items-center w-100">
         <div>
             <a href="/water-supply-system/index.php" class="d-block fw-bold">
-                <img src="/water-supply-system/public/assets/img/logo.png" alt="Logo" class="favicon">
+                <img src="/water-supply-system/assets/img/logo.png" alt="Logo" class="favicon">
             </a>
         </div>
         <div class="d-flex align-items-center">

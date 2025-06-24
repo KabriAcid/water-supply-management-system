@@ -1,23 +1,17 @@
 :root {
-  /* === Core Brand Colors (Your Deep Purples) === */
-  --primary-color: #93D2ED;
-  --primary-hover: #6badc9;
-  --dark-blue: #032189;
-
-  /* === Background & Surface === */
-  --background-color: #f9fafb; /* Ghost White */
-  --card-background: #ffffff; /* White cards */
-  --border-color: #e5e7eb; /* Light gray for dividers and inputs */
-
-  /* === Typography === */
-  --heading-color: #111827; /* Charcoal gray */
-  --text-color: #374151; /* Base text color */
-
-  /* === Semantic Colors === */
-  --success-color: #10b981; /* Emerald Green */
-  --warning-color: #f59e0b; /* Amber */
-  --danger-color: #ef4444; /* Rose Red */
-
+  --primary-color: #2196f3;
+  --primary-hover: #1769aa;
+  --secondary-color: #00bcd4;
+  --accent-color: #ffd600;
+  --dark-blue: #0d223a;
+  --background-color: #f4fafd;
+  --card-background: #ffffff;
+  --border-color: #e3e8ee;
+  --heading-color: #0d223a;
+  --text-color: #374151;
+  --success-color: #43a047;
+  --warning-color: #ffa000;
+  --danger-color: #e53935;
   --sidebar-width: 250px;
 }
 
@@ -30,13 +24,13 @@
 }
 
 body {
-  background-color: var(--primary-light);
+  background-color: var(--background-color);
   font-family: "Montserrat", sans-serif;
 }
 
 .favicon {
-  width: 34px;
-  height: 34px;
+  width: 50px;
+  height: 50px;
 }
 
 .main-container {
@@ -47,7 +41,6 @@ body {
 }
 
 .dashboard-body {
-  margin-left: var(--sidebar-width);
   overflow: auto;
   padding: 10px;
 }
@@ -68,18 +61,25 @@ body {
   margin: 12px 0;
   font-weight: 600;
 }
-/* SIDEBAR */
+.flex-grow-1 {
+  flex: 1 1 0%;
+  margin-left: var(--sidebar-width);
+  min-width: 0;
+  background: var(--background-color);
+  overflow-x: hidden;
+}
+
 .sidebar {
   background: #fff;
-  min-height: 100vh;
-  min-width: var(--sidebar-width);
+  height: 100vh;
+  width: var(--sidebar-width);
   position: fixed;
   left: 0;
   top: 0;
   z-index: 10;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--border-color, #e5e7eb);
+  border-right: 1px solid var(--border-color, #e3e8ee);
   transition: width 0.3s;
 }
 
@@ -88,7 +88,7 @@ body {
   display: flex;
   align-items: center;
   background: #f5f5f5;
-  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  border-bottom: 1px solid var(--border-color, #e3e8ee);
 }
 
 .sidebar .header a {
@@ -107,7 +107,7 @@ body {
 
 .sidebar .separator {
   border: none;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #e3e8ee;
   margin: 0.5rem 0;
 }
 
@@ -174,7 +174,6 @@ body {
   display: none;
 }
 
-/* Optional: Hide text when minimized (add .minimized to .sidebar via JS) */
 .sidebar.minimized {
   width: 60px;
 }
@@ -190,7 +189,6 @@ body {
 .item-tooltip {
   display: none;
 }
-/* --- End Simplified Sidebar Styles --- */
 
 #main-container {
   background: url('/water-supply-system/assets/img/water.jpg') no-repeat center center;

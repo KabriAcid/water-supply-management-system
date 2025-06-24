@@ -7,9 +7,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <div class="header">
             <a href="dashboard.php">
                 <span class="focus">
-                    <img src="../../favicon.png" alt="favicon" width="50px" height="50px">
+                    <img src="/water-supply-system/assets/img/logo.png" alt="favicon" width="50px" height="50px">
                 </span>
-                <span class="unfocus">Water Management System</span>
+                <span class="unfocus">WMSystem</span>
             </a>
         </div>
         <div class="separator-wrapper">
