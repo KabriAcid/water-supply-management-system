@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php elseif ($success): ?>
                 <div class="alert alert-success text-center fw-bold"><?= htmlspecialchars($success) ?></div>
             <?php endif; ?>
-            <form method="POST" autocomplete="off">
+            <form method="POST" autocomplete="off" class="shadow p-4 rounded-2 bg-white">
                 <div class="mb-3">
                     <label for="current_password" class="form-label">Current Password</label>
                     <input type="password" placeholder="Current Password" class="form-control" id="current_password" name="current_password" required minlength="6">

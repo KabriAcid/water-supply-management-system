@@ -73,6 +73,13 @@ $is_user = isset($_SESSION['user_id']) && !$is_admin;
                                 <span class="item-tooltip">Place Order</span>
                             </a>
                         </li>
+                        <li class="item <?php echo ($current_page == 'transactions.php') ? 'active' : ''; ?>">
+                            <a href="transactions.php">
+                                <i class="fa fa-credit-card"></i>
+                                <span class="item-text">Transaction History</span>
+                                <span class="item-tooltip">Transaction History</span>
+                            </a>
+                        </li>
                         <li class="item <?php echo ($current_page == 'profile.php') ? 'active' : ''; ?>">
                             <a href="profile.php">
                                 <i class="fa fa-user"></i>

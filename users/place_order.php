@@ -24,13 +24,13 @@ $user = get_user_info($pdo, $user_id);
     <div class="flex-grow-1" style="margin-left: var(--sidebar-width); min-width: 0; padding: 15px;">
         <?php require_once __DIR__ . '/../components/dashboard-navbar.php'; ?>
         <div class="container py-5 mt-5" style="max-width: 600px;">
-            <h2 class="fw-bold mb-4">Place New Water Order</h2>
+            <h2 class="fw-bold mb-4 text-center">Place New Water Order</h2>
             <?php if ($error): ?>
                 <div class="alert alert-danger text-center fw-bold"><?= htmlspecialchars($error) ?></div>
             <?php elseif ($success): ?>
                 <div class="alert alert-success text-center fw-bold"><?= htmlspecialchars($success) ?></div>
             <?php endif; ?>
-            <form id="order-form" method="POST" autocomplete="off">
+            <form id="order-form" method="POST" autocomplete="off" class="shadow p-4 rounded-2 bg-white">
                 <div class="mb-3">
                     <label for="quantity" class="form-label">Quantity (Litres)</label>
                     <input type="number" class="form-control" placeholder="e.g 2000" id="quantity" name="quantity" min="1" required inputmode="numeric">

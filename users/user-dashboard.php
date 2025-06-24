@@ -27,6 +27,13 @@ foreach ($orders as $order) {
     elseif ($order['status'] === 'In Progress') $in_progress_count++;
     elseif ($order['status'] === 'Delivered') $delivered_count++;
 }
+
+// Fetch current litre price
+$price_per_litre = 1.00;
+$stmt = $pdo->query("SELECT price_per_litre FROM settings LIMIT 1");
+if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $price_per_litre = $row['price_per_litre'];
+}
 ?>
 
 <body>
@@ -40,24 +47,30 @@ foreach ($orders as $order) {
                     <p class="text-muted">Place a new order or view your order history below.</p>
                 </div>
             </div>
-            <!-- Order status summary -->
+            <!-- Order status summary and litre price -->
             <div class="row mb-4">
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <div class="card shadow text-center p-4">
                         <span class="mb-2 text-secondary" style="font-size:1em;">Pending</span>
                         <h2 class="fs-3 fw-bold"><?= $pending_count ?></h2>
                     </div>
                 </div>
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <div class="card shadow text-center p-4">
                         <span class="mb-2 text-secondary" style="font-size:1em;">In Progress</span>
                         <h2 class="fs-3 fw-bold"><?= $in_progress_count ?></h2>
                     </div>
                 </div>
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <div class="card shadow text-center p-4">
                         <span class="mb-2 text-secondary" style="font-size:1em;">Delivered</span>
                         <h2 class="fs-3 fw-bold"><?= $delivered_count ?></h2>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <div class="card shadow text-center p-4">
+                        <span class="mb-2" style="font-size:1em;">Current Litre Price</span>
+                        <h2 class="fs-3 fw-bold">₦<?= number_format($price_per_litre, 2) ?></h2>
                     </div>
                 </div>
             </div>
