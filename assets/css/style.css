@@ -193,10 +193,9 @@ body {
 /* --- End Simplified Sidebar Styles --- */
 
 #main-container {
-  background: url(../img/water.jpg);
-  height: 100%;
-  width: 100%;
+  background: url('/water-supply-system/assets/img/water.jpg') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
-  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
 }
