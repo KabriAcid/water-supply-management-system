@@ -46,15 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <body>
-    <?php require __DIR__ . '/../components/navbar.php'; ?>
-    <div class="container-fluid py-5 mt-5">
-        <div class="container text-center">
+    <div class="container-fluid py-5" id="register-bg">
+        <div class="container text-center mt-5">
             <h1 class="display-4 fw-bold">Create Your Account</h1>
             <p class="lead">Sign up to place water delivery orders</p>
         </div>
         <div class="container d-flex align-items-center justify-content-center my-5">
             <div class="card shadow-lg p-4" style="max-width: 700px; width: 100%;">
-                <h3 class="text-center mb-4 fw-bold">Register</h3>
+                <h3 class="text-center mb-4 fw-bold gradient-text">Register</h3>
                 <?php if ($error): ?>
                     <div class="alert alert-danger text-center fw-bold"><?= htmlspecialchars($error) ?></div>
                 <?php elseif ($success): ?>
