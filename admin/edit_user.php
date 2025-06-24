@@ -61,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user) {
                     <h4 class="fw-bold">Edit User</h4>
                 </div>
                 <?php if ($error): ?>
-                    <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+                    <div class="alert alert-danger text-center fw-bold"><?= htmlspecialchars($error) ?></div>
                 <?php elseif ($success): ?>
-                    <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
+                    <div class="alert alert-success text-center fw-bold"><?= htmlspecialchars($success) ?></div>
                 <?php endif; ?>
                 <?php if ($user): ?>
                     <form method="POST" autocomplete="off">

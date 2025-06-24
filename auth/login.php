@@ -24,11 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
-            // Set session variables
+        // Use md5 for password check
+        if ($user && $user['password'] === md5($password)) {
             $_SESSION['user_id'] = $user['id'];
-            // Redirect to user dashboard
-            header("Location: ../admin/dashboard.php");
+            header("Location: ../users/user-dashboard.php");
             exit;
         } else {
             $error = "Invalid email or password.";
