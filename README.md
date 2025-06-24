@@ -47,10 +47,41 @@ A lightweight water tank delivery request platform built using **raw PHP (PDO)**
 - View all orders from all users
 - See user contact details with each order
 - Update order status via dropdown or button
+- Manages user accounts and delivery requests.
+- Processes incoming orders.
+- Marks orders as completed.
+
+Views reports and logs.
 - Status workflow:  
   `Pending → In Progress → Delivered`
 
+### Order Management
+- Order form with details like quantity, address, and delivery time.
+- Admin dashboard for managing and viewing orders.
+
 ---
+
+### ⚙️ 6. Functional Flow
+
+1 - User Registration/Login
+
+2 - User places order
+  - Chooses quantity, address, and date
+
+3 - Admin Dashboard
+  - Views new orders
+  - Marks status
+
+4 - Delivery
+  - Water tank is delivered
+  - Payment collected (COD)
+
+5 - Status Updated
+  - Admin marks as "Delivered"
+  - User sees final status
+
+
+
 
 ## 🗃️ Database Schema
 

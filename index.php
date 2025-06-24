@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/includes/main-header.php'; ?>
+<?php require __DIR__ . '/components/main-header.php'; ?>
 
 <body>
     <nav class="navbar fixed-top bg-secondary text-white">
