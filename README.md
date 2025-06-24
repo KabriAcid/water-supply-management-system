@@ -130,6 +130,6 @@ Views reports and logs.
 
 ### 1. Create Database
 ```sql
-CREATE DATABASE water_db;
-USE water_db;
+CREATE DATABASE water_supply_system;
+USE water_supply_system;
 -- Create users, admins, and orders tables (see schema above)
