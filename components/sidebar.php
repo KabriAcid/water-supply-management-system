@@ -88,6 +88,15 @@ $is_user = isset($_SESSION['user_id']) && !$is_admin;
                     <span class="title">Settings</span>
                 </div>
                 <ul class="items">
+                    <?php if ($is_admin): ?>
+                        <li class="item <?php echo ($current_page == 'settings.php') ? 'active' : ''; ?>">
+                            <a href="settings.php">
+                                <i class="fa fa-cog"></i>
+                                <span class="item-text">Set Litre Price</span>
+                                <span class="item-tooltip">Set Litre Price</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li class="item <?php echo ($current_page == 'update_password.php') ? 'active' : ''; ?>">
                         <a href="update_password.php">
                             <i class="fa fa-lock"></i>

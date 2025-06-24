@@ -49,30 +49,30 @@ $recent_orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="col-md-3">
                         <div class="card shadow text-center p-4">
                             <div class="card-icon text-primary mb-2"><i class="fa-solid fa-list"></i></div>
-                            <h6 class="card-title text-secondary text-sm">Total Orders</h6>
-                            <p class="card-text fs-3 fw-bold"><?= $total_orders ?></p>
+                            <p class="card-title text-secondary text-sm">Total Orders</p>
+                            <h3 class="card-text fw-bolder"><?= $total_orders ?></h3>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card shadow text-center p-4">
                             <div class="card-icon text-warning mb-2"><i class="fa-solid fa-clock"></i></div>
-                            <h6 class="card-title text-secondary text-sm">Pending Orders</h6>
-                            <p class="card-text fs-3 fw-bold"><?= $pending_orders ?></p>
+                            <p class="card-title text-secondary text-sm">Pending Orders</p>
+                            <h3 class="card-text fw-bolder"><?= $pending_orders ?></h3>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card shadow text-center p-4">
                             <div class="card-icon text-success mb-2"><i class="fa-solid fa-check-circle"></i></div>
-                            <h6 class="card-title text-secondary text-sm">Delivered Orders</h6>
-                            <p class="card-text fs-3 fw-bold"><?= $delivered_orders ?></p>
+                            <p class="card-title text-secondary text-sm">Delivered Orders</p>
+                            <h3 class="card-text fw-bolder"><?= $delivered_orders ?></h3>
                         </div>
                     </div>
                     
                     <div class="col-md-3">
                         <div class="card shadow text-center p-4">
                             <div class="card-icon text-info mb-2"><i class="fa-solid fa-users"></i></div>
-                            <h6 class="card-title text-secondary text-sm">Total Users</h6>
-                            <p class="card-text fs-3 fw-bold"><?= $total_users ?></p>
+                            <p class="card-title text-secondary text-sm">Total Users</p>
+                            <h3 class="card-text fw-bolder"><?= $total_users ?></h3>
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@ $recent_orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             </td>
                                             <td><?= date('Y-m-d H:i', strtotime($order['created_at'])) ?></td>
                                             <td>
-                                                <a href="orders.php?order_id=<?= $order['id'] ?>" class="btn btn-sm btn-outline-primary">View</a>
+                                                <a href="view_orders.php?order_id=<?= $order['id'] ?>" class="btn btn-sm btn-outline-primary">View</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

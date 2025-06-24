@@ -17,13 +17,6 @@ if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 // Get user info for payment
 $user_id = $_SESSION['user_id'];
 $user = get_user_info($pdo, $user_id);
-
-// Only handle order creation here if redirected from payment processor
-if (isset($_GET['success']) && $_GET['success'] === '1') {
-    $success = "Order placed and payment successful!";
-} elseif (isset($_GET['cancel']) && $_GET['cancel'] === '1') {
-    $error = "Payment was cancelled.";
-}
 ?>
 
 <body>
@@ -37,7 +30,7 @@ if (isset($_GET['success']) && $_GET['success'] === '1') {
             <?php elseif ($success): ?>
                 <div class="alert alert-success text-center fw-bold"><?= htmlspecialchars($success) ?></div>
             <?php endif; ?>
-            <form id="order-form" method="POST" autocomplete="off" action="process_payment.php">
+            <form id="order-form" method="POST" autocomplete="off">
                 <div class="mb-3">
                     <label for="quantity" class="form-label">Quantity (Litres)</label>
                     <input type="number" class="form-control" placeholder="e.g 2000" id="quantity" name="quantity" min="1" required inputmode="numeric">
@@ -52,6 +45,7 @@ if (isset($_GET['success']) && $_GET['success'] === '1') {
                 </div>
                 <input type="hidden" name="payment_reference" id="payment_reference">
                 <input type="hidden" name="amount" id="amount">
+                <input type="hidden" name="tx_ref" id="tx_ref">
                 <button type="submit"
                     class="btn gradient-btn w-100"
                     id="pay-btn"
@@ -72,16 +66,18 @@ if (isset($_GET['success']) && $_GET['success'] === '1') {
             const pricePerLitre = parseFloat(document.getElementById('pay-btn').getAttribute('data-price'));
             const amount = quantity * pricePerLitre;
             const deliveryAddress = document.getElementById('delivery_address').value.trim();
+            const deliveryDate = document.getElementById('delivery_date').value;
 
             if (!quantity || quantity < 1000 || !deliveryAddress) {
-                this.submit(); // Let PHP handle validation errors
+                alert("Please enter a valid quantity (min 1000) and delivery address.");
                 return;
             }
 
-            // Start Flutterwave payment
+            const txRef = "WSS-" + Date.now();
+
             FlutterwaveCheckout({
                 public_key: "<?= env('FLUTTERWAVE_PUBLIC_KEY') ?>",
-                tx_ref: "WSS-" + Date.now(),
+                tx_ref: txRef,
                 amount: amount,
                 currency: "NGN",
                 payment_options: "card,banktransfer",
@@ -95,11 +91,12 @@ if (isset($_GET['success']) && $_GET['success'] === '1') {
                     logo: "/water-supply-system/assets/img/logo.png"
                 },
                 callback: function(response) {
-                    if (response.status === "successful") {
-                        // Send data to process_payment.php via POST
+                    console.log(response);
+                    if ((response.status === "successful" || response.status === "completed") && response.transaction_id) {
                         const form = document.getElementById('order-form');
-                        document.getElementById('payment_reference').value = response.transaction_id || response.tx_ref;
+                        document.getElementById('payment_reference').value = response.transaction_id;
                         document.getElementById('amount').value = amount;
+                        document.getElementById('tx_ref').value = txRef;
                         form.action = "process_payment.php";
                         form.submit();
                     } else {
