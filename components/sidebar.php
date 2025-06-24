@@ -51,6 +51,13 @@ $is_user = isset($_SESSION['user_id']) && !$is_admin;
                                 <span class="item-tooltip">Users</span>
                             </a>
                         </li>
+                        <li class="item <?php echo ($current_page == 'profile.php') ? 'active' : ''; ?>">
+                            <a href="profile.php">
+                                <i class="fa fa-user"></i>
+                                <span class="item-text">Profile</span>
+                                <span class="item-tooltip">Profile</span>
+                            </a>
+                        </li>
                     <?php elseif ($is_user): ?>
                         <li class="item <?php echo ($current_page == 'user-dashboard.php') ? 'active' : ''; ?>">
                             <a href="../users/user-dashboard.php">
@@ -64,6 +71,13 @@ $is_user = isset($_SESSION['user_id']) && !$is_admin;
                                 <i class="fa fa-plus"></i>
                                 <span class="item-text">Place Order</span>
                                 <span class="item-tooltip">Place Order</span>
+                            </a>
+                        </li>
+                        <li class="item <?php echo ($current_page == 'profile.php') ? 'active' : ''; ?>">
+                            <a href="profile.php">
+                                <i class="fa fa-user"></i>
+                                <span class="item-text">Profile</span>
+                                <span class="item-tooltip">Profile</span>
                             </a>
                         </li>
                     <?php endif; ?>
