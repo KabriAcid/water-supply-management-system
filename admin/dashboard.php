@@ -26,6 +26,10 @@ $pending_orders = $stmt->fetchColumn();
 $stmt = $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'Delivered'");
 $delivered_orders = $stmt->fetchColumn();
 
+// In Progress orders
+$stmt = $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'In Progress'");
+$in_progress_orders = $stmt->fetchColumn();
+
 // Total users
 $stmt = $pdo->query("SELECT COUNT(*) FROM users");
 $total_users = $stmt->fetchColumn();
@@ -63,6 +67,7 @@ $recent_orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <p class="card-text fs-4"><?= $delivered_orders ?></p>
                         </div>
                     </div>
+                    
                     <div class="col-md-3">
                         <div class="card shadow text-center p-4">
                             <div class="card-icon text-info mb-2"><i class="fa-solid fa-users"></i></div>
@@ -108,7 +113,7 @@ $recent_orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                 ?>
                                             </td>
                                             <td><?= htmlspecialchars($user['phone'] ?? '-') ?></td>
-                                            <td><?= htmlspecialchars($order['quantity']) ?></td>
+                                            <td><?= htmlspecialchars($order['quantity']) ?> lts</td>
                                             <td><?= htmlspecialchars($order['delivery_address']) ?></td>
                                             <td>
                                                 <?php

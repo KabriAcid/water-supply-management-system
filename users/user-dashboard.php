@@ -38,9 +38,6 @@ foreach ($orders as $order) {
                 <div class="col">
                     <h2 class="fw-bold">Welcome, <?= htmlspecialchars($user['name'] ?? 'User') ?></h2>
                     <p class="text-muted">Place a new order or view your order history below.</p>
-                    <a href="place_order.php" class="btn btn-primary mt-2">
-                        <i class="fa fa-plus"></i> Place New Order
-                    </a>
                 </div>
             </div>
             <!-- Order status summary -->
