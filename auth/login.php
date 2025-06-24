@@ -52,8 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container-fluid py-5" id="login-bg">
         <div class="container text-center mt-5">
-            <h1 class="display-4 fw-bold">Welcome Back!</h1>
-            <p class="lead">Login to your account to continue</p>
+            <h1 class="display-4 fw-bold gradient-text">Welcome Back!</h1>
+            <p class="lead gradient-text">Login to your account to continue</p>
         </div>
         <div class="container d-flex align-items-center justify-content-center mt-5">
             <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%;">
