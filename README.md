@@ -126,21 +126,6 @@ Views reports and logs.
 
 ---
 
-## ⚙️ Project Todo
-
-TODO: Future Feature Enhancements
-
-1. Order Tracking
-   - Allow users to see real-time status and progress of their orders (Pending, In Progress, Delivered) with timestamps and visual indicators.
-
-2. User Profile Management
-   - Enable users to update their profile information (name, phone, address) and view detailed order history.
-
-3. Payment Integration
-   - Integrate online payment options (e.g., card, mobile money) and track payment status for each order.
-
-Keep these features in mind for the next development phase!
-
 ### 1. Create Database
 ```sql
 CREATE DATABASE water_supply_system;
