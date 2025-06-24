@@ -102,13 +102,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
                                                     <option value="In Progress" <?= $status === 'In Progress' ? 'selected' : '' ?>>In Progress</option>
                                                     <option value="Delivered" <?= $status === 'Delivered' ? 'selected' : '' ?>>Delivered</option>
                                                 </select>
-                                                <button type="submit" class="btn btn-sm btn-success">Update</button>
+                                                <button type="submit" class="btn btn-sm gradient-btn">Update</button>
                                             </form>
                                         </td>
                                         <td>
                                             <?php if ($order['status'] === 'Pending'): ?>
                                                 <a href="orders.php?order_id=<?= $order['id'] ?>&approve=yes" class="btn btn-sm btn-success" onclick="return confirm('Approve this order?');">Yes</a>
-                                                <a href="orders.php?order_id=<?= $order['id'] ?>&approve=no" class="btn btn-sm btn-danger" onclick="return confirm('Delete this order?');">No</a>
+                                                <a href="orders.php?order_id=<?= $order['id'] ?>&approve=no" class="btn btn-sm gradient-btn-alt" onclick="return confirm('Delete this order?');">No</a>
                                             <?php else: ?>
                                                 <span class="text-muted">-</span>
                                             <?php endif; ?>

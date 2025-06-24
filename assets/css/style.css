@@ -23,6 +23,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--background-color);
   font-family: "Montserrat", sans-serif;
@@ -191,9 +195,47 @@ body {
 }
 
 #main-container {
-  background: url('/water-supply-system/assets/img/water.jpg') no-repeat center center;
+  background: url("/water-supply-system/assets/img/water.jpg") no-repeat center
+    center;
   background-size: cover;
   background-attachment: fixed;
   min-height: 100vh;
   width: 100%;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #f4fbff 0%, #07609c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-btn {
+    background: linear-gradient(230deg, #00c6fb 0%, #005bea 100%);
+    color: #fff !important;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0,198,251,0.08);
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+.gradient-btn:hover, .gradient-btn:focus {
+    background: linear-gradient(230deg, #005bea 0%, #00c6fb 100%);
+    color: #fff !important;
+}
+
+.gradient-btn-alt {
+    background: linear-gradient(230deg, #005bea 0%, #00c6fb 100%);
+    color: #fff !important;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0,94,234,0.08);
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+.gradient-btn-alt:hover, .gradient-btn-alt:focus {
+    background: linear-gradient(230deg, #00c6fb 0%, #005bea 100%);
+    color: #fff !important;
 }

@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="password" class="form-control" id="password" name="password" placeholder="Create a password" required minlength="6">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success w-100 mt-4">Register</button>
+                    <button type="submit" class="btn gradient-btn w-100 mt-4">Register</button>
                 </form>
                 <div class="text-center mt-3">
                     <span>Already have an account?</span>

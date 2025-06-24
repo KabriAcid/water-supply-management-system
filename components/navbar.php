@@ -6,8 +6,8 @@
             </a>
         </div>
         <div class="d-flex align-items-center">
-            <a href="/water-supply-system/auth/login.php" class="btn btn-success m-0 mx-2">LOGIN</a>
-            <a href="/water-supply-system/auth/register.php" class="btn btn-dark m-0">CREATE ACCOUNT</a>
+            <a href="/water-supply-system/auth/login.php" class="btn gradient-btn m-0 mx-2">LOGIN</a>
+            <a href="/water-supply-system/auth/register.php" class="btn gradient-btn-alt m-0">CREATE ACCOUNT</a>
         </div>
     </div>
 </nav>

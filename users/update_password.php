@@ -57,17 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST" autocomplete="off">
                 <div class="mb-3">
                     <label for="current_password" class="form-label">Current Password</label>
-                    <input type="password" class="form-control" id="current_password" name="current_password" required minlength="6">
+                    <input type="password" placeholder="Current Password" class="form-control" id="current_password" name="current_password" required minlength="6">
                 </div>
                 <div class="mb-3">
                     <label for="new_password" class="form-label">New Password</label>
-                    <input type="password" class="form-control" id="new_password" name="new_password" required minlength="6">
+                    <input type="password" placeholder="New Password" class="form-control" id="new_password" name="new_password" required minlength="6">
                 </div>
                 <div class="mb-3">
                     <label for="confirm_password" class="form-label">Confirm New Password</label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required minlength="6">
+                    <input type="password" placeholder="Confirm Password" class="form-control" id="confirm_password" name="confirm_password" required minlength="6">
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Update Password</button>
+                <button type="submit" class="btn gradient-btn w-100">Update Password</button>
             </form>
         </div>
     </div>
