@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="flex-grow-1" style="margin-left: var(--sidebar-width); min-width: 0; padding: 15px;">
         <?php require_once __DIR__ . '/../components/dashboard-navbar.php'; ?>
         <div class="container py-5 mt-5" style="max-width: 500px;">
-            <h3 class="fw-bold mb-4">Change Password</h3>
+            <h3 class="fw-bold mb-4 text-center">Change Password</h3>
             <?php if ($error): ?>
                 <div class="alert alert-danger text-center fw-bold"><?= htmlspecialchars($error) ?></div>
             <?php elseif ($success): ?>

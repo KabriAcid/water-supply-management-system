@@ -33,7 +33,7 @@ if ($transactions) {
     <div class="flex-grow-1" style="margin-left: var(--sidebar-width); min-width: 0; padding: 15px;">
         <?php require_once __DIR__ . '/../components/dashboard-navbar.php'; ?>
         <div class="container py-5 mt-5">
-            <h3 class="fw-bold mb-4">Transaction History</h3>
+            <h3 class="fw-bold mb-4 text-center">Transaction History</h3>
             <div class="card shadow-sm">
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -71,7 +71,7 @@ if ($transactions) {
                                                 elseif ($txn['status'] === 'pending') $badge = 'warning';
                                                 elseif ($txn['status'] === 'failed') $badge = 'danger';
                                                 ?>
-                                                <span class="badge bg-<?= $badge ?>"><?= ucfirst($txn['status']) ?></span>
+                                                <span class="text-white badge bg-<?= $badge ?>"><?= ucfirst($txn['status']) ?></span>
                                             </td>
                                             <td><?= htmlspecialchars($txn['payment_reference']) ?></td>
                                             <td><?= htmlspecialchars($txn['payment_method']) ?></td>
