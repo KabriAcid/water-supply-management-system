@@ -43,21 +43,21 @@ foreach ($orders as $order) {
             <!-- Order status summary -->
             <div class="row mb-4">
                 <div class="col-md-4 mb-2">
-                    <div class="card shadow text-center p-3">
-                        <span class="mb-2" style="font-size:1.2em;">Pending</span>
-                        <div class="fs-3 fw-bold"><?= $pending_count ?></div>
+                    <div class="card shadow text-center p-4">
+                        <span class="mb-2 text-secondary" style="font-size:1em;">Pending</span>
+                        <h2 class="fs-3 fw-bold"><?= $pending_count ?></h2>
                     </div>
                 </div>
                 <div class="col-md-4 mb-2">
-                    <div class="card shadow text-center p-3">
-                        <span class="mb-2" style="font-size:1.2em;">In Progress</span>
-                        <div class="fs-3 fw-bold"><?= $in_progress_count ?></div>
+                    <div class="card shadow text-center p-4">
+                        <span class="mb-2 text-secondary" style="font-size:1em;">In Progress</span>
+                        <h2 class="fs-3 fw-bold"><?= $in_progress_count ?></h2>
                     </div>
                 </div>
                 <div class="col-md-4 mb-2">
-                    <div class="card shadow text-center p-3">
-                        <span class="mb-2" style="font-size:1.2em;">Delivered</span>
-                        <div class="fs-3 fw-bold"><?= $delivered_count ?></div>
+                    <div class="card shadow text-center p-4">
+                        <span class="mb-2 text-secondary" style="font-size:1em;">Delivered</span>
+                        <h2 class="fs-3 fw-bold"><?= $delivered_count ?></h2>
                     </div>
                 </div>
             </div>

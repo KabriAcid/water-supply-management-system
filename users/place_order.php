@@ -1,48 +1,39 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../auth/login.php");
-    exit;
-}
 require_once __DIR__ . '/../config/database.php';
-require __DIR__ . '/../components/header.php';
+require_once __DIR__ . '/../components/header.php';
+
+// Helper to get env variable
+function env($key, $default = null)
+{
+    if (isset($_ENV[$key])) return $_ENV[$key];
+    if (function_exists('getenv')) {
+        $val = getenv($key);
+        if ($val !== false) return $val;
+    }
+    return $default;
+}
+
 
 $error = '';
 $success = '';
 
-// Handle order submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $quantity = intval($_POST['quantity'] ?? 0);
-    $delivery_address = htmlspecialchars(trim($_POST['delivery_address'] ?? ''));
-    $delivery_date = $_POST['delivery_date'] ?? '';
-    
-    // if quantity is less than 1000 litres
-    if ($quantity < 1000) {
-        $error = "Minimum order quantity is 1000 litres.";
-    }
+// Fetch price per litre from settings
+$price_per_litre = 1.00; // default
+$stmt = $pdo->query("SELECT price_per_litre FROM settings LIMIT 1");
+if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $price_per_litre = $row['price_per_litre'];
+}
 
-    // if quantity is not a number 
-    if (!is_numeric($quantity)) {
-        $error = "Quantity must be a valid number.";
-    }
+// Get user info for payment
+$user_id = $_SESSION['user_id'];
+$user = get_user_info($pdo, $user_id);
 
-
-    if ($quantity <= 0 || !$delivery_address) {
-        $error = "All fields are required and quantity must be greater than 0.";
-    } else {
-        $stmt = $pdo->prepare("INSERT INTO orders (user_id, quantity, delivery_address, delivery_date, status, created_at) VALUES (?, ?, ?, ?, 'Pending', NOW())");
-        $result = $stmt->execute([
-            $_SESSION['user_id'],
-            $quantity,
-            $delivery_address,
-            $delivery_date ? $delivery_date : null
-        ]);
-        if ($result) {
-            $success = "Order placed successfully!";
-        } else {
-            $error = "Failed to place order. Please try again.";
-        }
-    }
+// Only handle order creation here if redirected from payment processor
+if (isset($_GET['success']) && $_GET['success'] === '1') {
+    $success = "Order placed and payment successful!";
+} elseif (isset($_GET['cancel']) && $_GET['cancel'] === '1') {
+    $error = "Payment was cancelled.";
 }
 ?>
 
@@ -57,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php elseif ($success): ?>
                 <div class="alert alert-success text-center fw-bold"><?= htmlspecialchars($success) ?></div>
             <?php endif; ?>
-            <form method="POST" autocomplete="off">
+            <form id="order-form" method="POST" autocomplete="off" action="process_payment.php">
                 <div class="mb-3">
                     <label for="quantity" class="form-label">Quantity (Litres)</label>
                     <input type="number" class="form-control" placeholder="e.g 2000" id="quantity" name="quantity" min="1" required inputmode="numeric">
@@ -70,10 +61,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="delivery_date" class="form-label">Preferred Delivery Date (optional)</label>
                     <input type="date" class="form-control" id="delivery_date" name="delivery_date">
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Place Order</button>
+                <input type="hidden" name="payment_reference" id="payment_reference">
+                <input type="hidden" name="amount" id="amount">
+                <button type="submit"
+                    class="btn gradient-btn w-100"
+                    id="pay-btn"
+                    data-price="<?= htmlspecialchars($price_per_litre) ?>">
+                    Place Order & Pay
+                </button>
             </form>
         </div>
     </div>
+
+    <!-- Flutterwave JS -->
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script>
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const pricePerLitre = parseFloat(document.getElementById('pay-btn').getAttribute('data-price'));
+            const amount = quantity * pricePerLitre;
+            const deliveryAddress = document.getElementById('delivery_address').value.trim();
+
+            if (!quantity || quantity < 1000 || !deliveryAddress) {
+                this.submit(); // Let PHP handle validation errors
+                return;
+            }
+
+            // Start Flutterwave payment
+            FlutterwaveCheckout({
+                public_key: "<?= env('FLUTTERWAVE_PUBLIC_KEY') ?>",
+                tx_ref: "WSS-" + Date.now(),
+                amount: amount,
+                currency: "NGN",
+                payment_options: "card,banktransfer",
+                customer: {
+                    email: "<?= htmlspecialchars($user['email'] ?? 'user@example.com') ?>",
+                    name: "<?= htmlspecialchars($user['name'] ?? 'User') ?>"
+                },
+                customizations: {
+                    title: "Water Supply Payment",
+                    description: "Payment for water order",
+                    logo: "/water-supply-system/assets/img/logo.png"
+                },
+                callback: function(response) {
+                    if (response.status === "successful") {
+                        // Send data to process_payment.php via POST
+                        const form = document.getElementById('order-form');
+                        document.getElementById('payment_reference').value = response.transaction_id || response.tx_ref;
+                        document.getElementById('amount').value = amount;
+                        form.action = "process_payment.php";
+                        form.submit();
+                    } else {
+                        alert("Payment was not successful. Please try again.");
+                    }
+                },
+                onclose: function() {
+                    window.location.href = "user-dashboard.php";
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
