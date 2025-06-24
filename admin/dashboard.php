@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../login.php");
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: ../auth/login.php");
     exit;
 }
 require_once __DIR__ . '/../config/database.php';
@@ -30,8 +30,8 @@ $delivered_orders = $stmt->fetchColumn();
 $stmt = $pdo->query("SELECT COUNT(*) FROM users");
 $total_users = $stmt->fetchColumn();
 
-// Recent orders (last 5)
-$stmt = $pdo->query("SELECT o.*, u.name, u.phone FROM orders o JOIN users u ON o.user_id = u.id ORDER BY o.created_at DESC LIMIT 5");
+// Fetch all orders (no JOIN)
+$stmt = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC");
 $recent_orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -98,8 +98,16 @@ $recent_orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <?php foreach ($recent_orders as $i => $order): ?>
                                         <tr>
                                             <td><?= $i + 1 ?></td>
-                                            <td><?= htmlspecialchars($order['name']) ?></td>
-                                            <td><?= htmlspecialchars($order['phone']) ?></td>
+                                            <td>
+                                                <?php
+                                                // Fetch user info for each order (no JOIN)
+                                                $user_stmt = $pdo->prepare("SELECT name, phone FROM users WHERE id = ?");
+                                                $user_stmt->execute([$order['user_id']]);
+                                                $user = $user_stmt->fetch(PDO::FETCH_ASSOC);
+                                                echo htmlspecialchars($user['name'] ?? 'Unknown');
+                                                ?>
+                                            </td>
+                                            <td><?= htmlspecialchars($user['phone'] ?? '-') ?></td>
                                             <td><?= htmlspecialchars($order['quantity']) ?></td>
                                             <td><?= htmlspecialchars($order['delivery_address']) ?></td>
                                             <td>

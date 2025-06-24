@@ -15,22 +15,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = clean_input($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    // Basic validation
     if (!$email || !$password) {
         $error = 'All fields are required.';
     } else {
-        // Fetch user by email
+        // Try to find user in users table
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
-        // Use md5 for password check
-        if ($user && $user['password'] === md5($password)) {
-            $_SESSION['user_id'] = $user['id'];
-            header("Location: ../users/user-dashboard.php");
-            exit;
+        // Try to find admin in admins table if not found in users
+        if (!$user) {
+            $stmt = $pdo->prepare("SELECT * FROM admins WHERE email = ?");
+            $stmt->execute([$email]);
+            $admin = $stmt->fetch();
+            if ($admin && $admin['password'] === md5($password)) {
+                $_SESSION['admin_id'] = $admin['id'];
+                header("Location: ../admin/dashboard.php");
+                exit;
+            } else {
+                $error = "Invalid email or password.";
+            }
         } else {
-            $error = "Invalid email or password.";
+            // User login
+            if ($user['password'] === md5($password)) {
+                $_SESSION['user_id'] = $user['id'];
+                header("Location: ../users/user-dashboard.php");
+                exit;
+            } else {
+                $error = "Invalid email or password.";
+            }
         }
     }
 }
@@ -50,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form action="" method="POST">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="you@email.com" required inputmode="email" maxlength="100">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="you@email.com" required maxlength="100">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>

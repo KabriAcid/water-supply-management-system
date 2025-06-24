@@ -1,11 +1,15 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
+
+// Determine user type
+$is_admin = isset($_SESSION['admin_id']);
+$is_user = isset($_SESSION['user_id']) && !$is_admin;
 ?>
 
 <aside class="sidebar">
     <nav>
         <div class="header">
-            <a href="dashboard.php">
+            <a href="<?= $is_admin ? 'dashboard.php' : '../users/user-dashboard.php' ?>">
                 <span class="focus">
                     <img src="/water-supply-system/assets/img/logo.png" alt="favicon" width="50px" height="50px">
                 </span>
@@ -25,27 +29,44 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <span class="title">Main</span>
                 </div>
                 <ul class="items">
-                    <li class="item <?php echo ($current_page == 'dashboard.php') ? 'active' : ''; ?>">
-                        <a href="dashboard.php">
-                            <i class="fa fa-table-columns"></i>
-                            <span class="item-text">Dashboard</span>
-                            <span class="item-tooltip">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="item <?php echo ($current_page == 'orders.php') ? 'active' : ''; ?>">
-                        <a href="orders.php">
-                            <i class="fa fa-truck"></i>
-                            <span class="item-text">All Orders</span>
-                            <span class="item-tooltip">All Orders</span>
-                        </a>
-                    </li>
-                    <li class="item <?php echo ($current_page == 'users.php') ? 'active' : ''; ?>">
-                        <a href="users.php">
-                            <i class="fa fa-users"></i>
-                            <span class="item-text">Users</span>
-                            <span class="item-tooltip">Users</span>
-                        </a>
-                    </li>
+                    <?php if ($is_admin): ?>
+                        <li class="item <?php echo ($current_page == 'dashboard.php') ? 'active' : ''; ?>">
+                            <a href="dashboard.php">
+                                <i class="fa fa-table-columns"></i>
+                                <span class="item-text">Dashboard</span>
+                                <span class="item-tooltip">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="item <?php echo ($current_page == 'orders.php') ? 'active' : ''; ?>">
+                            <a href="orders.php">
+                                <i class="fa fa-truck"></i>
+                                <span class="item-text">All Orders</span>
+                                <span class="item-tooltip">All Orders</span>
+                            </a>
+                        </li>
+                        <li class="item <?php echo ($current_page == 'users.php') ? 'active' : ''; ?>">
+                            <a href="users.php">
+                                <i class="fa fa-users"></i>
+                                <span class="item-text">Users</span>
+                                <span class="item-tooltip">Users</span>
+                            </a>
+                        </li>
+                    <?php elseif ($is_user): ?>
+                        <li class="item <?php echo ($current_page == 'user-dashboard.php') ? 'active' : ''; ?>">
+                            <a href="../users/user-dashboard.php">
+                                <i class="fa fa-table-columns"></i>
+                                <span class="item-text">Dashboard</span>
+                                <span class="item-tooltip">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="item <?php echo ($current_page == 'place_order.php') ? 'active' : ''; ?>">
+                            <a href="../users/place_order.php">
+                                <i class="fa fa-plus"></i>
+                                <span class="item-text">Place Order</span>
+                                <span class="item-tooltip">Place Order</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <div class="section settings-section">
